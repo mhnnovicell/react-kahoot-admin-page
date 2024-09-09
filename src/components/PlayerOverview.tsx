@@ -74,7 +74,7 @@ export default function CreatePlayers() {
       <form className='w-full'>
         <div className='mb-5'>
           <h1 className='mb-10 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white'>
-            OwlHoot - Admin Page
+            OwlHoot🦉 - Admin Page
           </h1>
           <p className='mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white'>
             Spillere:

@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { motion } from 'framer-motion';
+import logo1 from '../assets/logo1.png';
 
 // Move Supabase client creation to a separate file
 
@@ -74,7 +75,9 @@ export default function CreatePlayers() {
       <form className='w-full'>
         <div className='mb-5'>
           <h1 className='mb-10 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white'>
-            OwlHoot🦉 - Admin Page
+            Quizazoid  - Admin Page
+          <img className="w-32 h-32 " src={logo1} alt="image description" />
+
           </h1>
           <p className='mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white'>
             Spillere:

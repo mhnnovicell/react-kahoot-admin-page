@@ -3,6 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "resolutions": {
+    "esbuild": "0.14.29"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",

@@ -1,10 +1,9 @@
 import { useEffect, useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import logo1 from '../assets/logo1.png';
-import { pb } from '../services/playerService'; // Ensure you have exported pb from playerService
 
 // Extract API calls into a separate service
-import { fetchPlayers, deletePlayer } from '../services/playerService';
+import { fetchPlayers, deletePlayer, pb } from '../services/playerService.ts';
 
 export default function CreatePlayers() {
   const [showNotification, setNotificationStatus] = useState(false);
@@ -141,9 +140,9 @@ export default function CreatePlayers() {
                 >
                   <path
                     stroke='currentColor'
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
-                    stroke-width='2'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth='2'
                     d='m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6'
                   />
                 </svg>

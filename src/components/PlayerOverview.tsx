@@ -1,9 +1,16 @@
 import { useEffect, useState, useCallback } from 'react';
+import { createClient } from '@supabase/supabase-js';
 import { motion } from 'framer-motion';
 import logo1 from '../assets/logo1.png';
 
+// Move Supabase client creation to a separate file
 // Extract API calls into a separate service
-import { fetchPlayers, deletePlayer, pb } from '../services/playerService.ts';
+import { fetchPlayers, deletePlayer } from '../services/playerService';
+
+const supabaseUrl = 'https://emlynmhrnmephemzdehn.supabase.co';
+const supabaseKey =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVtbHlubWhybm1lcGhlbXpkZWhuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDY2MjIyODIsImV4cCI6MjAyMjE5ODI4Mn0.8xCLIDhvutgdpB4l1rGKV00Sf3MoPGMKKCsqblZAYk4';
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 export default function CreatePlayers() {
   const [showNotification, setNotificationStatus] = useState(false);
@@ -16,27 +23,30 @@ export default function CreatePlayers() {
 
   useEffect(() => {
     fetchAndSetPlayers();
-
-    pb.collection('players').subscribe('*', async (payload) => {
-      console.log(payload, 'payload');
-      fetchAndSetPlayers();
-    });
-
+    const test = supabase
+      .channel('custom-all-channel')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'players' },
+        async (payload) => {
+          console.log(payload, 'payload');
+          fetchAndSetPlayers();
+        }
+      )
+      .subscribe();
     return () => {
-      pb.collection('players').unsubscribe('*');
+      supabase.removeChannel(test);
     };
   }, [fetchAndSetPlayers]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    try {
-      const record = await pb.collection('admin').create({ startGame: true });
-      console.log(record, 'data');
-      setNotificationStatus(true);
-    } catch (error) {
-      console.error('Error inserting data:', error);
-    }
+    const { data, error } = await supabase
+      .from('admin')
+      .insert({ startGame: true })
+      .select();
+    console.log(data, 'data');
+    setNotificationStatus(true);
   };
 
   const removePlayer = useCallback(async (name) => {
@@ -55,10 +65,12 @@ export default function CreatePlayers() {
     <div className='flex items-center justify-center p-4 mt-5 rounded-xl sm:mt-10 md:p-10'>
       <form className='w-full'>
         <div className='mb-5'>
-          <h1 className='mb-10 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white'>
-            Quizazoid - Admin Page
-            <img className='w-32 h-32 ' src={logo1} alt='image description' />
-          </h1>
+          <div className='flex items-center mb-4'>
+            <h1 className='text-4xl font-extrabold leading-none tracking-tight text-white md:text-5xl lg:text-6xl'>
+              Quizazoid - Admin page
+            </h1>
+            <img className='w-32 h-32' src={logo1} alt='Logo' />
+          </div>
           <p className='mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white'>
             Spillere:
           </p>
@@ -140,9 +152,9 @@ export default function CreatePlayers() {
                 >
                   <path
                     stroke='currentColor'
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth='2'
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                    stroke-width='2'
                     d='m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6'
                   />
                 </svg>

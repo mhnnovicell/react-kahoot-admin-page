@@ -1,24 +1,12 @@
-import { Suspense, lazy, useEffect } from 'react';
+import { Suspense, lazy } from 'react';
 import './App.css';
-import { authenticate } from './services/playerService';
 
 const PlayerOverview = lazy(() => import('./components/PlayerOverview'));
 
 function App() {
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        await authenticate('mikkelhn1@hotmail.com', 'mikkelhn1');
-      } catch (error) {
-        console.error('Authentication failed:', error);
-      }
-    }
-    fetchData();
-  }, []);
-
   return (
     <>
-      <div className='flex flex-col items-center justify-center w-full h-full'>
+      <div className='flex flex-col items-center justify-center w-full h-full '>
         <Suspense fallback={<Loading />}>
           <PlayerOverview></PlayerOverview>
         </Suspense>

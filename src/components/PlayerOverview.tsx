@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { motion } from 'framer-motion';
-import logo1 from '../assets/logo1.png';
+import logo1 from '../../public/logo1.png';
 
 // Move Supabase client creation to a separate file
 // Extract API calls into a separate service

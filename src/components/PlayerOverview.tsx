@@ -67,7 +67,7 @@ export default function CreatePlayers() {
         <div className='mb-5'>
           <div className='flex items-center mb-4'>
             <h1 className='text-4xl font-extrabold leading-none tracking-tight text-white md:text-5xl lg:text-6xl'>
-              Quizazoid - Admin page
+              Quizazoid - admin
             </h1>
             <img className='w-32 h-32' src={logo1} alt='Logo' />
           </div>

@@ -29,31 +29,31 @@ export default defineConfig({
         background_color: '#541B82',
         icons: [
           {
-            src: 'src/assets/web-app-manifest-192x192.png',
+            src: '/web-app-manifest-192x192.png',
             sizes: '192x192',
             type: 'image/png',
           },
           {
-            src: 'src/assets/web-app-manifest-512x512.png',
+            src: '/web-app-manifest-512x512.png',
             sizes: '512x512',
             type: 'image/png',
           },
           {
-            src: 'src/assets/favicon-96x96.png',
+            src: '/favicon-96x96.png',
             sizes: '96x96',
             type: 'image/png',
           },
         ],
         screenshots: [
           {
-            src: 'src/assets/web-app-manifest-512x512.png',
+            src: '/web-app-manifest-512x512.png',
             sizes: '512x512',
             type: 'image/png',
             form_factor: 'narrow',
             label: 'Quizazoid admin page',
           },
           {
-            src: 'src/assets/web-app-manifest-512x512.png',
+            src: '/web-app-manifest-512x512.png',
             sizes: '512x512',
             type: 'image/png',
             form_factor: 'wide',
